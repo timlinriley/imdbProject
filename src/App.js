@@ -3,6 +3,7 @@ import './App.css';
 import {useState, useEffect} from 'react';
 import Form from './components/Form'
 import DisplayMovies from './components/DisplayMovies';
+import Display from './components/Display';
 
 function App() {
 
@@ -23,20 +24,24 @@ const apiKey = "9011f3c8";
     const data = await response.json();
     //set the Movie state to the movie
     setMovie(data);
-    setFavMovies([...favMovies, data]);
+    // setFavMovies([...favMovies, data]);
+    // Try this:
+    setFavMovies((prev) => [...prev, data]);
  
     console.log(movie, '**')
     console.log(favMovies, 'favMovies Array')
+
+  
   };
+
 
 
   return (
     <div className="App">
       <Form favMovie={getMovie}  />
       {/* favMovies={addFavMovies} */}
-      <DisplayMovies  />
+      <DisplayMovies favMovies={favMovies} />
     </div>
   );
 }
-
 export default App;
